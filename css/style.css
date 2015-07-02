@@ -1,5 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=VT323);
-/*@import url(https://fonts.googleapis.com/css?family=Cousine);*/
+/**@import url(https://fonts.googleapis.com/css?family=VT323);/**/
+/**/@import url(https://fonts.googleapis.com/css?family=Cousine);/**/
 
 * {
   padding: 0;
@@ -7,7 +7,7 @@
 }
 
 body,#console>pre {
-  font-family: 'VT323', monospace;
+  font-family: 'Cousine', monospace;
   font-size: 14px;
   color: #C0C0C0;
 }
