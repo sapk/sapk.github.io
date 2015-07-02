@@ -6,7 +6,7 @@
   margin: 0;
 }
 
-body,#console>pre {
+body,#console>pre,#console input {
   font-family: 'Cousine', monospace;
   font-size: 14px;
   color: #C0C0C0;
@@ -20,4 +20,10 @@ body,#console>pre {
   height: 100%;
   padding: 10px;
   background-color: #343434;
+}
+
+#console input {
+    width: 100%;
+    border: 0px none;
+    background: transparent;
 }
