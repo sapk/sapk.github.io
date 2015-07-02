@@ -6,7 +6,7 @@
   margin: 0;
 }
 
-body {
+body,#console>pre {
   font-family: 'VT323', monospace;
   font-size: 14px;
   color: #C0C0C0;
