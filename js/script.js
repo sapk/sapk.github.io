@@ -3,10 +3,13 @@ var CV = CV || {};
         	$(function(){
         		//Definition de variable globale
         		CV.console = $("#console");
+        		$("#console #input").html(`${CV.current_locale["prompt"]} <input type="text">`);
         		CV.input = $("#console input");
-        		
+
 				CV.console.add = function(text) { 
         			CV.input.parent().before(`<pre id="line-${CV.console.find('pre').length}" >${text}</pre>`); //TODO réfléchir si l'id est utile'
+        		    //CV.input.focus(); //to go down
+        		    CV.console[0].scrollTo(0, CV.console.height());
 				};
 				
         		//on focus la console au démarrage
@@ -16,6 +19,7 @@ var CV = CV || {};
 				CV.input.keypress(function(e) {
     			    var keyCode = e.keyCode || e.which; 
     
+                    //TODO add keyup and down for history
                     switch(keyCode){
                         case 13 :  //enter ke is press
         			        $(this).trigger("enterKeyPress");
@@ -46,10 +50,10 @@ var CV = CV || {};
 				//Si l'on a validé la saisi on cherche la comamnde et on l'execute
         		CV.input.on("enterKeyPress",function(){
         		    window.console.log(CV)
-        		    var exe = $(this).val().split(" ");
+        		    var exe = $(this).val().replace(/\s+/g,' ').split(" ");
         			window.console.log("Commande saisie :",exe,typeof CV.cmd[exe[0]]);
         			CV.input.attr("disabled","disabled");
-        			CV.console.add(`visitor@sapk.github.io ~ $ ${$(this).val()}`);
+        			CV.console.add(`${CV.current_locale["prompt"]} ${$(this).val()}`);
         			if(typeof CV.cmd[exe[0]] == "function"){
         				window.console.log("Execution de :",exe[0],CV.cmd[exe[0]]);
         				CV.cmd[exe.shift()](exe);
@@ -57,9 +61,9 @@ var CV = CV || {};
         				//On cherche les resemblance
         				var result = CV.tool.searchStringInArray(exe[0],Object.keys(CV.cmd));
         				if(result == -1){
-        					CV.console.add(`command not found`);
+        					CV.console.add(`${CV.current_locale["command_not_found"]}`);
         				}else{
-        					CV.console.add(`command not found maybe you want to use : ${result}`);
+        					CV.console.add(`${CV.current_locale["command_not_found_maybe"]} : ${result}`);
         				}
         			}
         			CV.input.removeAttr("disabled");
@@ -67,6 +71,11 @@ var CV = CV || {};
         		});
         		
         		$("#console").on("click", function(){
+        		    var themes = ["ubuntu","hacker","red","normal"]
         		    CV.input.focus();
+        		    var i = (themes.indexOf(CV.console.attr("data-theme"))+1)%themes.length
+        		    console.log(i,themes[i])
+        		    CV.console.attr("data-theme",themes[i])
+        		    //TODO change them color
         		})
         	})
