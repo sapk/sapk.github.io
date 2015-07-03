@@ -1,12 +1,13 @@
-/**@import url(https://fonts.googleapis.com/css?family=VT323);/**/
+/**/@import url(https://fonts.googleapis.com/css?family=VT323);/**/
 /**/@import url(https://fonts.googleapis.com/css?family=Cousine);/**/
+/**/@import url(https://fonts.googleapis.com/css?family=Ubuntu);/**/
 
 * {
   padding: 0;
   margin: 0;
 }
 
-body,#console>pre,#console input {
+#console>pre,#console input {
   font-family: 'Cousine', monospace;
   font-size: 14px;
   color: #C0C0C0;
@@ -18,7 +19,8 @@ body,#console>pre,#console input {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   background-color: #343434;
 }
 #console>pre {
@@ -31,4 +33,36 @@ body,#console>pre,#console input {
     width: 100%;
     border: 0px none;
     background: transparent;
+}
+
+
+#console[data-theme="ubuntu"] {
+    background-color: #4A1A2C;
+}
+
+#console[data-theme="ubuntu"]>pre,#console[data-theme="ubuntu"] input {
+  font-family: 'Ubuntu', monospace;
+  font-size: 14px;
+  color: #EEE;
+}
+
+
+#console[data-theme="hacker"] {
+    background-color: #131313;
+}
+
+#console[data-theme="hacker"]>pre,#console[data-theme="hacker"] input {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: #138413;
+}
+
+#console[data-theme="red"] {
+    background-color: #F30000;
+}
+
+#console[data-theme="red"]>pre,#console[data-theme="red"] input {
+  font-family: monospace;
+  font-size: 14px;
+  color: #F3F3F3;
 }
