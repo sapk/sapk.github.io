@@ -30,11 +30,23 @@
     margin-top:10px;
 }
 #console input {
-    width: 100%;
+    /*width: 100%;*/
     border: 0px none;
     background: transparent;
+    outline: none;
 }
 
+a[data-file-id] {
+    /*padding: 2px 2px 1px;*/
+    /*border-bottom : 1px solid rgba(250,250,250,0.3);*/
+}
+
+a[data-file-id]:hover {
+    background: #C0C0C0;
+    color: #343434;
+}
+
+/* Themes */
 
 #console[data-theme="ubuntu"] {
     background-color: #4A1A2C;
@@ -46,6 +58,10 @@
   color: #EEE;
 }
 
+#console[data-theme="ubuntu"]>pre a[data-file-id]:hover {
+    background: #EEE;
+    color: #4A1A2C;
+}
 
 #console[data-theme="hacker"] {
     background-color: #131313;
@@ -57,12 +73,23 @@
   color: #138413;
 }
 
+#console[data-theme="hacker"]>pre a[data-file-id]:hover {
+    background: #138413;
+    color: #131313;
+}
+
 #console[data-theme="red"] {
-    background-color: #F30000;
+    background-color: #800000;
 }
 
 #console[data-theme="red"]>pre,#console[data-theme="red"] input {
-  font-family: monospace;
+  font-family: "Lucida Console", Monaco, monospace;
   font-size: 14px;
-  color: #F3F3F3;
+  color: #C0C0C0;
+}
+
+
+#console[data-theme="red"]>pre a[data-file-id]:hover {
+    background: #C0C0C0;
+    color: #800000;
 }

@@ -6,49 +6,69 @@ CV.cmd = {
 	        		"time" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_time"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_time"]+"\n ");
 	        		    }
-	        			CV.console.add((new Date()).toLocaleTimeString()+"\n ");
+	        			CV.console.log((new Date()).toLocaleTimeString()+"\n ");
 	        		},
 	        		"date" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_date"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_date"]+"\n ");
 	        		    }
-	        			CV.console.add((new Date()).toLocaleDateString()+"\n ");
+	        			CV.console.log((new Date()).toLocaleDateString()+"\n ");
 	        		},
 	        		"datetime" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_datetime"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_datetime"]+"\n ");
 	        		    }
-	        			CV.console.add((new Date()).toLocaleString()+"\n ");
+	        			CV.console.log((new Date()).toLocaleString()+"\n ");
+	        		},
+	        		"history" : function(args){
+	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+	        		        //Show help message
+	        			    return CV.console.log(CV.current_locale["help_history"]+"\n ");
+	        		    }
+	        		    
+	        		    if(args.length > 0 && args.indexOf("-c") != -1){
+	        		        //Show help message
+	        			    return CV.history.reset();
+	        		    }
+	        		    
+	        		    max_line = (args.length > 0 && args.indexOf("-n") != -1)?args[args.indexOf("-n")+1]:CV.history.max_length;
+                        nb_line=Math.max(CV.history.count(),max_line);
+	        		    $.each(CV.history.list().slice(-max_line), function(i, cmd){
+    	        		     CV.console.log("["+(i+1+nb_line-max_line)+"] : " +cmd)
+                        })
+	        		    CV.console.log(" ")
+	        			//CV.console.log((new Date()).toLocaleDateString()+"\n ");
 	        		},
 	        		"locale" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_locale"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_locale"]+"\n ");
 	        		    }
 	        		    console.log(args);
 	        		    if(args.length == 0){
-	        		        CV.console.add(CV.conf.locale+"\n ");
+	        		        CV.console.log(CV.conf.locale+"\n ");
 	        		    } else if (args[0] == "-a") {
 	        		        $.each(CV.locale, function(index, item){
-	        		            CV.console.add(index)
+	        		            CV.console.log(index)
                             })
-	        		        CV.console.add(" ")
+	        		        CV.console.log(" ")
 	        		    }
 	        		},
 	        		"export" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_export"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_export"]+"\n ");
 	        		    }
 	        		    //TODO save all unkonw variables
 	        		    console.log(args);
 	        		    if (args.length == 1 && args[0].startsWith("LANG=")) {
+	        		        //TODO change lang without reload
 	        		        if(typeof CV.locale[args[0].split("=")[1]] == "undefined") {
-    	        		        return CV.console.add(CV.current_locale["unknown_language"]);
+    	        		        return CV.console.log(CV.current_locale["unknown_language"]);
     	        		    }
 	        		        localStorage.current_locale = args[0].split("=")[1]
 	        		        console.log(localStorage.current_locale)
@@ -58,40 +78,55 @@ CV.cmd = {
 	        		"env" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_env"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_env"]+"\n ");
 	        		    }
-	        		    CV.console.add("LANG="+CV.conf.locale+"\n ");
-	        		},/*
-	        		"ls" : function(args){
+	        		    CV.console.log("LANG="+CV.conf.locale+"\n ");
+	        		},
+	        		"open" : function(args){
+	        		    //TODO support subfolder + add direct link
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_ls"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_open"]+"\n ");
 	        		    }
-	        		    CV.console.add("cdd img index.html js\n ");
+	        		     CV.file.open(args[0]);
+	        		},
+	        		"ls" : function(args){
+	        		    //TODO support subfolder + add direct link
+	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+	        		        //Show help message
+	        			    return CV.console.log(CV.current_locale["help_ls"]+"\n ");
+	        		    }
+	        		    var html = ". ";
+	        		    $.each(CV.file.list(),function(i,file){
+	        		        html += `<a data-file-id="${file}">${file}</a> `
+	        		    })
+	        		    CV.console.log(html+"\n ");
 	        		},
 	        		"tree" : function(args){
+	        		    //TODO support subfolder + add direct link
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
-	        			    return CV.console.add(CV.current_locale["help_tree"]+"\n ");
+	        			    return CV.console.log(CV.current_locale["help_tree"]+"\n ");
 	        		    }
-	        			CV.console.add(`
-.
-|-- css
-|-- img
-|-- index.html
-\`-- js
-  `);
-	        		}, //*/
+	        		    var html = ". \n";
+	        		    $.each(CV.file.list().slice(0,-1),function(i,file){
+	        		        html += `|-- <a data-file-id="${file}">${file}</a>\n`
+	        		    })
+	        		    file = CV.file.list().slice(-1)
+	        		    html += `\\\`-- <a data-file-id="${file}">${file}</a>\n`
+	        		    CV.console.log(html+"\n ");
+
+	        		}, 
 	        		"help" : function(args){
     	        		    if(args.length > 0 && args.indexOf("-h") != -1){
     	        		        //Show help message
-    	        			    return CV.console.add(CV.current_locale["help_help"]+"\n ");
+    	        			    return CV.console.log(CV.current_locale["help_help"]+"\n ");
     	        		    }
     	        		    if(args.length > 0){ //functionname has been specified
     	        		        $.each(args, function(i, name){
     	        		            console.log(i,name,CV.cmd[name],typeof CV.cmd[name])
     	        		            if(typeof CV.cmd[name] == "function"){
-        	        		            CV.console.add(name +" : ")
+        	        		            CV.console.log(name +" : ")
         	        		            CV.cmd[name](["-h"])
         	        		        }
                                 })
@@ -100,8 +135,8 @@ CV.cmd = {
     	        		    //Else we show all functions
 	        		        $.each(CV.cmd, function(name, func){
 	        		            if(name != "help"){
-    	        		            //CV.console.add(name +" : \n"+func(["-h"])+"\n ")
-    	        		            CV.console.add(name +" : ")
+    	        		            //CV.console.log(name +" : \n"+func(["-h"])+"\n ")
+    	        		            CV.console.log(name +" : ")
     	        		            func(["-h"])
 	        		            }
                             })
