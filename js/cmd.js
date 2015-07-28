@@ -24,6 +24,13 @@ CV.cmd = {
 	        		    }
 	        			CV.console.log((new Date()).toLocaleString()+"\n ");
 	        		},
+	        		"snake" : function(args){
+	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+	        		        //Show help message
+	        			    return CV.console.log(CV.current_locale["help_snake"]+"\n ");
+	        		    }
+	        		    window.location.href="game/snake/";
+	        		},
 	        		"history" : function(args){
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
@@ -97,8 +104,8 @@ CV.cmd = {
 	        			    return CV.console.log(CV.current_locale["help_ls"]+"\n ");
 	        		    }
 	        		    var html = ". ";
-	        		    $.each(CV.file.list(),function(i,file){
-	        		        html += `<a data-file-id="${file}">${file}</a> `
+	        		    $.each(CV.file.list(),function(id,f){
+	        		        html += `<a data-file-id="${id}" title="${f.desc}" >${id}</a> `
 	        		    })
 	        		    CV.console.log(html+"\n ");
 	        		},
@@ -109,11 +116,15 @@ CV.cmd = {
 	        			    return CV.console.log(CV.current_locale["help_tree"]+"\n ");
 	        		    }
 	        		    var html = ". \n";
-	        		    $.each(CV.file.list().slice(0,-1),function(i,file){
-	        		        html += `|-- <a data-file-id="${file}">${file}</a>\n`
+	        		    var file_list = CV.file.list();
+	        		    //last= CV.file.list().last()
+	        		    $.each(file_list,function(id,f){
+	        		        html += `|-- <a data-file-id="${id}" title="${f.desc}" >${id}</a>\n`
 	        		    })
-	        		    file = CV.file.list().slice(-1)
-	        		    html += `\\\`-- <a data-file-id="${file}">${file}</a>\n`
+						//We change last line
+	        		    var n=html.lastIndexOf("|--");
+	        		    html = html.substring(0, n)+ `\\\`` + html.substring(n+1) ;
+	        		    //html += `\\\`-- <a data-file-id="${file}">${last}</a>\n`
 	        		    CV.console.log(html+"\n ");
 
 	        		}, 

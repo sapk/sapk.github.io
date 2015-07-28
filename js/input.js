@@ -5,7 +5,7 @@ CV.input =  {
     set : function(){ //Permit to change lang and reset el
         $("#console #input").html(`${CV.current_locale["prompt"]} <input type="text">`);
         CV.input._el = $("#console input");
-        CV.input._el.width(($(document).width()-CV.input._el.offset().left-42)+"px")
+        CV.input._el.width(($("#console #input").width()-CV.input._el.offset().left-10)+"px")
         //console.log(CV.input);
         //console.log($.extend(CV.input, CV.input._el));
         //console.log(CV.input);

@@ -13,6 +13,8 @@ CV.locale = {
     -h Display this help message`,
         "help_time" : `Display current time : time
     -h Display this help message`,
+        "help_snake" : `Play snake game : snake
+    -h Display this help message`,
         "help_open" : `Open a file : open filename
     -h Display this help message`,
         "help_history" : `Display commands use in the past : history
@@ -46,6 +48,8 @@ CV.locale = {
         "help_date" : `Affiche la date courante : date
     -h Affiche ce message d'aide`,
         "help_time" : `Affiche l'heure courante : time
+    -h Affiche ce message d'aide`,
+        "help_snake" : `Jouer au jeu snake : snake
     -h Affiche ce message d'aide`,
         "help_open" : `Ouvre un fichier : open filename
     -h Affiche ce message d'aide`,
