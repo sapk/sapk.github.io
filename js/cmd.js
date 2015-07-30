@@ -169,6 +169,13 @@ CV.cmd = {
 	        		            }
                             })
 	        		},
+	        		"clear" : function(args){ //TODO
+    	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+    	        		        //Show help message
+	        			        return CV.console.log(CV.current_locale["help_clear"]+"\n ");
+    	        		    }
+    	        		    CV.console._el.find("pre[id^=line-]").remove();
+	        		},
 	        		"sudo" : function(args){ //TODO
     	        		    if(args.length > 0 && args.indexOf("-h") != -1){
     	        		        //Show help message

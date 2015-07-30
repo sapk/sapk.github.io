@@ -18,6 +18,8 @@ CV.locale = {
     -h Display this help message`,
         "help_open" : `Open a file : open filename
     -h Display this help message`,
+        "help_clear" : `Clear the console : clear
+    -h Display this help message`,
         "help_history" : `Display commands use in the past : history
     -h Display this help message
     -c Clear the history list
@@ -52,6 +54,8 @@ CV.locale = {
         "help_time" : `Affiche l'heure courante : time
     -h Affiche ce message d'aide`,
         "help_snake" : `Jouer au jeu snake : snake
+    -h Affiche ce message d'aide`,
+        "help_clear" : `Nettoie la console : clear
     -h Affiche ce message d'aide`,
         "help_open" : `Ouvre un fichier : open filename
     -h Affiche ce message d'aide`,
