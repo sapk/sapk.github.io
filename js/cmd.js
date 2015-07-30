@@ -103,30 +103,47 @@ CV.cmd = {
 	        		        //Show help message
 	        			    return CV.console.log(CV.current_locale["help_ls"]+"\n ");
 	        		    }
-	        		    var html = ". ";
-	        		    $.each(CV.file.list(),function(id,f){
-	        		        html += `<a data-file-id="${id}" title="${f.desc}" >${id}</a> `
-	        		    })
+	        		    //TODO support folder +  multiple folder
+	        		    var html = "";
+                        args = CV.tool.cleanFolderArgs(args);
+	        		    if(args.length > 0){
+    	        		    $.each(args,function(i,folder){
+    	        		        if (folder=="")
+    	        		            return;
+    	        		        //TODO check if folder exist
+	        		            html += `<div>${folder} : <br><span style="margin-left:10px;">`
+        	        		    $.each(CV.file.list(folder),function(id,f){
+        	        		        html += `<a data-file-id="${id}" title="${f.desc}" >${id}</a> `
+        	        		    })
+	        		            html += `</span></div>`
+        	        		});
+	        		    }else{
+    	        		    $.each(CV.file.list(),function(id,f){
+    	        		        html += `<a data-file-id="${id}" title="${f.desc}" >${id}</a> `
+    	        		    })
+	        		    }
 	        		    CV.console.log(html+"\n ");
 	        		},
 	        		"tree" : function(args){
+
 	        		    //TODO support subfolder + add direct link
 	        		    if(args.length > 0 && args.indexOf("-h") != -1){
 	        		        //Show help message
 	        			    return CV.console.log(CV.current_locale["help_tree"]+"\n ");
 	        		    }
-	        		    var html = ". \n";
-	        		    var file_list = CV.file.list();
-	        		    //last= CV.file.list().last()
-	        		    $.each(file_list,function(id,f){
-	        		        html += `|-- <a data-file-id="${id}" title="${f.desc}" >${id}</a>\n`
-	        		    })
-						//We change last line
-	        		    var n=html.lastIndexOf("|--");
-	        		    html = html.substring(0, n)+ `\\\`` + html.substring(n+1) ;
-	        		    //html += `\\\`-- <a data-file-id="${file}">${last}</a>\n`
+	        		    var html = "";
+                        args = CV.tool.cleanFolderArgs(args);
+                        if(args.length > 0){
+    	        		    $.each(args,function(i,folder){
+    	        		        //TODO nicrement spacing
+	        		            html += `<div>${folder} : <br>`
+                                html += CV.cmd_sub_func.tree(folder,1);
+	        		            html += `</div>`
+    	        		    });
+	        		    }else{
+	        		        html += CV.cmd_sub_func.tree();
+	        		    }
 	        		    CV.console.log(html+"\n ");
-
 	        		}, 
 	        		"help" : function(args){
     	        		    if(args.length > 0 && args.indexOf("-h") != -1){
@@ -152,4 +169,44 @@ CV.cmd = {
 	        		            }
                             })
 	        		},
+	        		"sudo" : function(args){ //TODO
+    	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+    	        		        //Show help message
+    	        			    return CV.console.log("\n ");
+    	        		    }
+    	        		    //TODO crack the matrice
+	        		},
+	        		"uname" : function(args){ //TODO
+    	        		    if(args.length > 0 && args.indexOf("-h") != -1){
+    	        		        //Show help message
+    	        			    return CV.console.log("\n ");
+    	        		    }
+    	        		    //TODO crack the matrice
+	        		},
+}
+CV.cmd_sub_func = {
+    tree : function(folder,level){
+        level = level?level:0;
+        console.log(folder,level)
+        var html = "";
+        var tab = "";
+        for(i=0;i<level;i++)
+            tab+= "     ";
+            
+	    $.each(CV.file.list(folder),function(id,f){
+	        if(f._isfolder){ //TODO a recursive function
+	            html += tab+`|-- <a data-file-id="${id}" title="${f.desc}" >${id} : </a>\n`
+	            html += CV.cmd_sub_func.tree((folder?folder+"/":"")+id,level+1);
+	        }else {
+	            html += tab+`|-- <a data-file-id="${id}" title="${f.desc}" >${id}</a>\n`
+	        }
+	    })
+        var n=html.lastIndexOf("|--");
+        var n2=html.lastIndexOf("\\\`--");
+        console.log(n,n2,html)
+        if(n>n2){
+            html = html.substring(0, n)+ `\\\`` + html.substring(n+1) ;
+        }
+        return html;
+    }
 }

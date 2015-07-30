@@ -7,6 +7,7 @@ CV.locale = {
         "command_not_found" : "command not found",
         "command_not_found_maybe" : "command not found maybe you want to use",
         "file_not_found": "file not found",
+        "folder_not_found": "folder not found",
         "help_datetime" : `Display current date and time : datetime
     -h Display this help message`,
         "help_date" : `Display current date : date
@@ -43,6 +44,7 @@ CV.locale = {
         "command_not_found" : "commande invalide",
         "command_not_found_maybe" : "commande invalide vous vouliez peut-être utiliser",
         "file_not_found": "fichier introuvable",
+        "folder_not_found": "dossier introuvable",
         "help_datetime" : `Affiche la date et l'heure courante : datetime
     -h Affiche ce message d'aide`,
         "help_date" : `Affiche la date courante : date
