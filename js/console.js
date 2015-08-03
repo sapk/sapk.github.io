@@ -4,7 +4,10 @@ CV.console =  {
     themes : ["ubuntu","hacker","red","normal"],
     init : function() {
         CV.console._el = $("#console");
-        CV.console._el.on("click", function(e){
+        CV.console._el.on("click", function(e){            
+            if($(e.target).is("i")){ //We do nothing if it social i
+                return ;
+            }
             //console.log(this,e,$(this).attr("data-file-id"))
             if($(e.target).is("[data-file-id]")){ //file link
                 return CV.file.open($(e.target).attr("data-file-id"));

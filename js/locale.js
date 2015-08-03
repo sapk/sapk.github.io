@@ -2,7 +2,7 @@ var CV = CV || {};
 
 CV.locale = {
     "en_US" : {
-        "prompt" : "visitor@sapk.github.io ~ $",
+        "prompt" : "visitor@"+window.location.host+" ~ $",
         "unknown_language" : "unknown language !",
         "command_not_found" : "command not found",
         "command_not_found_maybe" : "command not found maybe you want to use",
@@ -19,6 +19,9 @@ CV.locale = {
         "help_open" : `Open a file : open filename
     -h Display this help message`,
         "help_clear" : `Clear the console : clear
+    -h Display this help message`,
+        "help_uname" : `Display  systeme information : uname
+    -a Display more
     -h Display this help message`,
         "help_history" : `Display commands use in the past : history
     -h Display this help message
@@ -41,7 +44,7 @@ CV.locale = {
     -h Display this help message`,
     },
     "fr_FR" : {
-        "prompt" : "visiteur@sapk.github.io ~ $",
+        "prompt" : "visiteur@"+window.location.host+" ~ $",
         "unknown_language" : "langue inconnue !",
         "command_not_found" : "commande invalide",
         "command_not_found_maybe" : "commande invalide vous vouliez peut-être utiliser",
@@ -56,6 +59,8 @@ CV.locale = {
         "help_snake" : `Jouer au jeu snake : snake
     -h Affiche ce message d'aide`,
         "help_clear" : `Nettoie la console : clear
+    -h Affiche ce message d'aide`,
+        "help_uname" : `Affiche les informations systèmes : uname
     -h Affiche ce message d'aide`,
         "help_open" : `Ouvre un fichier : open filename
     -h Affiche ce message d'aide`,

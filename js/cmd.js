@@ -184,11 +184,15 @@ CV.cmd = {
     	        		    //TODO crack the matrice
 	        		},
 	        		"uname" : function(args){ //TODO
-    	        		    if(args.length > 0 && args.indexOf("-h") != -1){
-    	        		        //Show help message
-    	        			    return CV.console.log("\n ");
+    	        		    if(args.length > 0){
+        	        		    if(args.indexOf("-h") != -1)
+    	        			        return CV.console.log(CV.current_locale["help_uname"]+"\n ");
+        	        		        //Show help message
+        	        		    if(args.indexOf("-a") != -1)
+    	        			        return CV.console.log("Linux "+window.location.host+" 4.1.3-# #1 SMP Mon Aug 3 17:31:25 EST 2015 x86_64 GNU/Linux\n ");
+        	        		        //Show extende version
     	        		    }
-    	        		    //TODO crack the matrice
+    	        			return CV.console.log("GNU/Linux "+window.location.host+" 4.1\n ");
 	        		},
 }
 CV.cmd_sub_func = {

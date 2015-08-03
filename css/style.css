@@ -6,7 +6,26 @@
   padding: 0;
   margin: 0;
 }
-
+#social{
+    margin: -76px 0px 22px 220px;
+}
+i{
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-size: 24px;
+    opacity: 0.25;
+    margin: 0 2px;
+}
+i:hover{
+    opacity: 1;
+}
+i.github{
+    background-image: url("../img/github.png");
+}
+i.twitter{
+    background-image: url("../img/twitter.png");
+}
 #console>pre,#console input {
   font-family: 'Cousine', monospace;
   font-size: 14px;
@@ -55,6 +74,9 @@ a[data-file-id]:hover {
     background-color: #4A1A2C;
 }
 
+#console[data-theme="ubuntu"] #social{
+    margin: -45px 0px 0px 10px;
+}
 #console[data-theme="ubuntu"]>pre,#console[data-theme="ubuntu"] input {
   font-family: 'Ubuntu', monospace;
   font-size: 14px;
@@ -76,7 +98,9 @@ a[data-file-id]:hover {
   border: 1px solid green;
   */
 }
-
+#console[data-theme="hacker"] #social{
+    margin: -80px 0px 22px 198px;
+}
 #console[data-theme="hacker"]>pre,#console[data-theme="hacker"] input {
   font-family: 'VT323', monospace;
   font-size: 18px;
@@ -92,6 +116,9 @@ a[data-file-id]:hover {
     background-color: #800000;
 }
 
+#console[data-theme="red"] #social{
+    margin: -67px 0px 22px 220px;
+}
 #console[data-theme="red"]>pre,#console[data-theme="red"] input {
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 14px;
