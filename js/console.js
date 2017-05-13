@@ -4,7 +4,7 @@ CV.console =  {
     themes : ["ubuntu","hacker","red","normal"],
     init : function() {
         CV.console._el = $("#console");
-        CV.console._el.on("click", function(e){            
+        CV.console._el.on("dblclick", function(e){            
             if($(e.target).is("i")){ //We do nothing if it social i
                 return ;
             }
